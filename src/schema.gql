@@ -1,0 +1,421 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PostCountAggregate {
+  id: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  title: Int!
+  content: Int!
+  published: Int!
+  authorId: Int!
+  _all: Int!
+}
+
+type PostAvgAggregate {
+  id: Float
+  authorId: Float
+}
+
+type PostSumAggregate {
+  id: Int
+  authorId: Int
+}
+
+type PostMinAggregate {
+  id: Int
+  createdAt: DateTime
+  updatedAt: DateTime
+  title: String
+  content: String
+  published: Boolean
+  authorId: Int
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type PostMaxAggregate {
+  id: Int
+  createdAt: DateTime
+  updatedAt: DateTime
+  title: String
+  content: String
+  published: Boolean
+  authorId: Int
+}
+
+type AggregatePost {
+  _count: PostCountAggregate
+  _avg: PostAvgAggregate
+  _sum: PostSumAggregate
+  _min: PostMinAggregate
+  _max: PostMaxAggregate
+}
+
+type Profile {
+  id: ID!
+  bio: String
+  user: User!
+  userId: Int!
+}
+
+type UserCount {
+  posts: Int!
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String
+  posts: [Post!]
+  profile: Profile
+  _count: UserCount!
+}
+
+type Post {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  content: String
+  published: Boolean!
+  author: User!
+  authorId: Int!
+}
+
+type UserCountAggregate {
+  id: Int!
+  email: Int!
+  name: Int!
+  _all: Int!
+}
+
+type UserAvgAggregate {
+  id: Float
+}
+
+type UserSumAggregate {
+  id: Int
+}
+
+type UserMinAggregate {
+  id: Int
+  email: String
+  name: String
+}
+
+type UserMaxAggregate {
+  id: Int
+  email: String
+  name: String
+}
+
+type AggregateUser {
+  _count: UserCountAggregate
+  _avg: UserAvgAggregate
+  _sum: UserSumAggregate
+  _min: UserMinAggregate
+  _max: UserMaxAggregate
+}
+
+type Query {
+  Users(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
+  User(where: UserWhereUniqueInput!): User!
+  aggregateUsers(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, _count: UserCountAggregateInput, _avg: UserAvgAggregateInput, _sum: UserSumAggregateInput, _min: UserMinAggregateInput, _max: UserMaxAggregateInput): AggregateUser!
+  Posts(where: PostWhereInput, orderBy: [PostOrderByWithRelationInput!], cursor: PostWhereUniqueInput, take: Int, skip: Int, distinct: [PostScalarFieldEnum!]): [Post!]!
+  Post(where: PostWhereUniqueInput!): Post!
+  aggregatePosts(where: PostWhereInput, orderBy: [PostOrderByWithRelationInput!], cursor: PostWhereUniqueInput, take: Int, skip: Int, _count: PostCountAggregateInput, _avg: PostAvgAggregateInput, _sum: PostSumAggregateInput, _min: PostMinAggregateInput, _max: PostMaxAggregateInput): AggregatePost!
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: IntFilter
+  email: StringFilter
+  name: StringNullableFilter
+  posts: PostListRelationFilter
+  profile: ProfileRelationFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input PostListRelationFilter {
+  every: PostWhereInput
+  some: PostWhereInput
+  none: PostWhereInput
+}
+
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  id: IntFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  title: StringFilter
+  content: StringNullableFilter
+  published: BoolFilter
+  author: UserRelationFilter
+  authorId: IntFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+input ProfileRelationFilter {
+  is: ProfileWhereInput
+  isNot: ProfileWhereInput
+}
+
+input ProfileWhereInput {
+  AND: [ProfileWhereInput!]
+  OR: [ProfileWhereInput!]
+  NOT: [ProfileWhereInput!]
+  id: IntFilter
+  bio: StringNullableFilter
+  user: UserRelationFilter
+  userId: IntFilter
+}
+
+input UserOrderByWithRelationInput {
+  id: SortOrder
+  email: SortOrder
+  name: SortOrder
+  posts: PostOrderByRelationAggregateInput
+  profile: ProfileOrderByWithRelationInput
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input PostOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ProfileOrderByWithRelationInput {
+  id: SortOrder
+  bio: SortOrder
+  user: UserOrderByWithRelationInput
+  userId: SortOrder
+}
+
+input UserWhereUniqueInput {
+  id: Int
+  email: String
+}
+
+enum UserScalarFieldEnum {
+  id
+  email
+  name
+}
+
+input UserCountAggregateInput {
+  id: Boolean
+  email: Boolean
+  name: Boolean
+  _all: Boolean
+}
+
+input UserAvgAggregateInput {
+  id: Boolean
+}
+
+input UserSumAggregateInput {
+  id: Boolean
+}
+
+input UserMinAggregateInput {
+  id: Boolean
+  email: Boolean
+  name: Boolean
+}
+
+input UserMaxAggregateInput {
+  id: Boolean
+  email: Boolean
+  name: Boolean
+}
+
+input PostOrderByWithRelationInput {
+  id: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  title: SortOrder
+  content: SortOrder
+  published: SortOrder
+  author: UserOrderByWithRelationInput
+  authorId: SortOrder
+}
+
+input PostWhereUniqueInput {
+  id: Int
+}
+
+enum PostScalarFieldEnum {
+  id
+  createdAt
+  updatedAt
+  title
+  content
+  published
+  authorId
+}
+
+input PostCountAggregateInput {
+  id: Boolean
+  createdAt: Boolean
+  updatedAt: Boolean
+  title: Boolean
+  content: Boolean
+  published: Boolean
+  authorId: Boolean
+  _all: Boolean
+}
+
+input PostAvgAggregateInput {
+  id: Boolean
+  authorId: Boolean
+}
+
+input PostSumAggregateInput {
+  id: Boolean
+  authorId: Boolean
+}
+
+input PostMinAggregateInput {
+  id: Boolean
+  createdAt: Boolean
+  updatedAt: Boolean
+  title: Boolean
+  content: Boolean
+  published: Boolean
+  authorId: Boolean
+}
+
+input PostMaxAggregateInput {
+  id: Boolean
+  createdAt: Boolean
+  updatedAt: Boolean
+  title: Boolean
+  content: Boolean
+  published: Boolean
+  authorId: Boolean
+}

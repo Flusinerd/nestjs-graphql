@@ -1,0 +1,75 @@
+{
+  "sourceRoot": "apps/nestjs-graphql/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/nestjs-graphql",
+        "main": "apps/nestjs-graphql/src/main.ts",
+        "tsConfig": "apps/nestjs-graphql/tsconfig.app.json",
+        "assets": ["apps/nestjs-graphql/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/nestjs-graphql/src/environments/environment.ts",
+              "with": "apps/nestjs-graphql/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "nestjs-graphql:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nestjs-graphql/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/nestjs-graphql"],
+      "options": {
+        "jestConfig": "apps/nestjs-graphql/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "migrate-save": {
+      "builder": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx prisma migrate save --experimental --schema ./src/prisma/prisma.schema",
+        "cwd": "apps/nestjs-graphql"
+      }
+    },
+    "migrate-up": {
+      "builder": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx prisma migrate up --experimental --schema ./src/prisma/prisma.schema",
+        "cwd": "apps/nestjs-graphql"
+      }
+    },
+    "gen-client": {
+      "builder": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx prisma generate --schema ./src/prisma/prisma.schema",
+        "cwd": "apps/nestjs-graphql"
+      }
+    }
+  },
+  "tags": []
+}

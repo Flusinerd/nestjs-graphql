@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "nestjs-graphql": "apps/nestjs-graphql",
+    "nestjs-query-framework": "libs/nestjs-query-framework"
+  }
+}
